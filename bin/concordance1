@@ -1,0 +1,6 @@
+#! /usr/bin/env ruby
+
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
+require "concordance1"
+concordance = Concordance.new(Kernel,Kernel)
+concordance.build_concordance
