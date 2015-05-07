@@ -5,28 +5,24 @@ class Concordance
         @output = output
     end
 
-    def add_keys
+    def add_and_list_keys
         @text = @input.gets.to_s.split(/ /)
         if @text == ([])
             @output.puts "{}"
         else 
-            sort
+            @sorted_words = @text.sort
+            @sorted_words.each do |word| 
+                @list = "#{word}\n"
+                @output.puts @list
+            end
         end
     end
 
-    def sort
-        @sorted_words = @text.sort
-        @sorted_words.each do |word| 
-            @list = "#{word}\n"
-            @output.puts @list
-        end
-    end
-
-    def build_concordance
+    def build_concordance(input)
         concordance  = {}
         position = 0 
-        words_separated_by_spaces = @list.split(/\n/)
-        words_separated_by_spaces.each do |word|
+        words = input.split(/ /)
+        words.each do |word|
             if concordance[word] == nil
                 concordance[word] = [position]
             else
@@ -34,9 +30,7 @@ class Concordance
             end
             position += word.length + 1
         end
-        require "pry"
-        binding.pry
-        @output.puts concordance
+        return concordance
     end
 
 end
